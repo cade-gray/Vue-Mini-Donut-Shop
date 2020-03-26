@@ -1,0 +1,27 @@
+{
+	"donuts":[
+		{
+			"id": "1",
+			"name": "Regular Donut",
+			"batter":  "regular",
+			"toppings": [ "glazed", "sugar", "chocolate", "maple"],
+			"price": "3"
+		},
+		{
+			"id": "2",
+			"name": "Chocolate Donut",
+			"batter":  "chocolate",
+			"toppings": [ "glazed", "sugar", "chocolate"],
+			"price": "3.50"
+		},
+		{
+			"id": "3",
+			"name": "Blueberry Donut",
+			"type":  "blueberry",
+			"toppings": [ "glazed", "sugar"],
+			"price": "3.75"
+		}
+		
+
+	]
+}

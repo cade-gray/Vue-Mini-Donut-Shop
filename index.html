@@ -1,0 +1,92 @@
+<html>
+    <script src="./vue.js"></script>
+    <style>
+        .headerText{
+            color: #f8ff3a;
+        }
+        body{
+            background: linear-gradient(309deg, #f8ccf5, #ff3296);
+        }
+        #app{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .fetchButt{
+            width: 100px;
+            height: 50px;
+            border-radius: 5px;
+            box-shadow: #222 0 5px 10px;
+            margin: 20px;
+        }
+        button:hover{
+            background: #ccc;
+        }
+        .donutButt{
+            width: 200px;
+            height: 100px;
+            margin: 20px;
+            border-radius: 5px;
+        }
+        .donutCard{
+            background: #ffffff;
+            border-radius: 5px;
+            color: #333;
+            box-shadow: #222 0 5px 10px;
+            padding: 20px;
+        }
+    </style>
+    <body>
+        <div id="app">
+            <h1 class="headerText">Cade's Donut Shop</h1>
+            <button class="fetchButt" @click="getDonuts">Fetch Donuts</button>
+            <div v-if="fetched">
+                <button v-for="donut in donuts" @click="setDonut(donut.id)" class="donutButt">
+                    {{donut.name}}
+                </button>
+            </div>
+            <div v-if="picked" class="donutCard">
+                <h2>Name: {{name}}</h2>
+                <h3>Batter: {{batter}}</h3>
+                <h3>Toppings</h3>
+                <ul>
+                    <li v-for="topping in toppings"><h4>{{topping}}</h4></li>
+                </ul>
+                <h2>Price: ${{price}}</h2>
+                <button style="width: 100px;height: 40px; border-radius: 5px;background: greenyellow;" onclick="alert('Sorry, due to coronavirus concerns, we are currently closed.')">Check Out</button>
+            </div>
+        </div>
+    </body>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                fetched: false,
+                picked: false,
+                donuts: [],
+                name: "",
+                batter: "",
+                toppings: [],
+                price: ""
+            },
+            methods: {
+                getDonuts: function(){
+                    fetch("./donutStore.json")
+                    .then(res => res.json())
+                    .then(data => {
+                        this.donuts = data.donuts
+                        this.fetched = true;
+                    })
+                },
+                setDonut: function(id){
+                    id = id - 1
+                    this.picked = true
+                    this.name = this.donuts[id].name
+                    this.batter = this.donuts[id].batter
+                    this.toppings = this.donuts[id].toppings
+                    this.price = this.donuts[id].price
+                }
+            }
+        })
+    </script>
+</html>
